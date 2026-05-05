@@ -1,10 +1,5 @@
 package com.example;
 
-import com.example.component.Step;
-import com.example.component.Stepper;
-import com.example.wizard.PaymentInformationSection;
-import com.example.wizard.PersonalDetailsSection;
-import com.example.wizard.ShippingAddressSection;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
@@ -12,11 +7,12 @@ import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.theme.lumo.LumoUtility.BoxSizing;
-import com.vaadin.flow.theme.lumo.LumoUtility.Flex;
-import com.vaadin.flow.theme.lumo.LumoUtility.MaxWidth;
-import com.vaadin.flow.theme.lumo.LumoUtility.Overflow;
-import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
+import com.vaadin.flow.theme.lumo.LumoUtility.*;
+import com.example.component.Step;
+import com.example.component.Stepper;
+import com.example.wizard.PaymentInformationSection;
+import com.example.wizard.PersonalDetailsSection;
+import com.example.wizard.ShippingAddressSection;
 
 
 @PageTitle("Wizard")
@@ -25,7 +21,7 @@ public class WizardLayout extends Main implements RouterLayout, AfterNavigationO
     private Div content;
 
     public WizardLayout() {
-        addClassNames("com.example.wizard-layout");
+        addClassNames("wizard-layout");
         add(createStepper(), createContent());
     }
 
@@ -36,8 +32,7 @@ public class WizardLayout extends Main implements RouterLayout, AfterNavigationO
 
         Stepper stepper = new Stepper(personalDetails, shippingAddress, paymentInformation);
         stepper.addClassNames(BoxSizing.BORDER, MaxWidth.SCREEN_SMALL, Padding.LARGE);
-        stepper.setOrientation(Stepper.Orientation.HORIZONTAL);
-        stepper.setSmall(true);
+        stepper.setOrientation(Stepper.Orientation.VERTICAL);
         return stepper;
     }
 

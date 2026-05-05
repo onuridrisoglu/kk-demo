@@ -7,7 +7,7 @@ section {
 }
 
 .wizard-layout {
-/*    display: flex; */
+    display: flex;
     width: 800px;
     margin: 0 auto;
 }
@@ -15,11 +15,10 @@ section {
     margin: 0 auto;
     max-width: 250px;
 }
-/*
+
 nav.stepper {
     margin-top: 67px;
 }
-*/
 /* Numbered steps */
 
 nav.stepper ul {
