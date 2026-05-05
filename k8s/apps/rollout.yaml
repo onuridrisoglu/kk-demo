@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: kits-demo
-          image: onurvaadin/kits-demo:2.0
+          image: onurvaadin/kits-demo:1.0
           env:
             - name: APP_VERSION
-              value: "2.0"
+              value: "1.0"
             - name: DB_HOSTNAME
               value: postgres-db-rw
             - name: VAADIN_KUBERNETES_ROLLING_UPDATES
