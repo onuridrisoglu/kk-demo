@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
     
     <properties>
-        <java.version>25</java.version>
+        <java.version>21</java.version>
         <vaadin.version>25.1.5</vaadin.version>
     </properties>
     
@@ -44,7 +44,19 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>kubernetes-kit-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
