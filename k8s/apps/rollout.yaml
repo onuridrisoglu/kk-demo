@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: kits-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kits-demo
+  template:
+    metadata:
+      labels:
+        app: kits-demo
+    spec:
+      containers:
+        - name: kits-demo
+          image: onurvaadin/kits-demo:1.0
+          env:
+            - name: APP_VERSION
+              value: "1.0"
+            - name: DB_HOSTNAME
+              value: postgres-db-rw
+            - name: VAADIN_KUBERNETES_ROLLING_UPDATES
+              value: "true"
+            - name: VAADIN_KUBERNETES_STICKY_SESSION_COOKIE_NAME
+              value: "vaadin.session"
+            - name: VAADIN_KUBERNETES_CLUSTER_KEY_COOKIE_NAME
+              value: "clusterKey"
+            - name: VAADIN_KUBERNETES_UPDATE_VERSION_HEADER_NAME
+              value: "X-AppUpdate"
+            - name: VAADIN_SUBSCRIPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: vaadin-subscription-key
+                  key: subscriptionKey
+          ports:
+            - name: http
+              containerPort: 8080
+  strategy:
+    canary:
+      canaryService: kits-demo-canary
+      stableService: kits-demo-stable
+      gatewayAPI:
+        httpRoute: kits-demo
+        namespace: default
+      steps:
+        - setWeight: 0      # deploy v2, no traffic yet
+        - pause: {}         # verify v2 on canary service, then promote manually
+        - setWeight: 100    # all new sessions → v2, existing v1 sessions stay via sticky cookie
+        - pause: {}         # notify v1 users (push X-AppUpdate header to route.yaml), wait for drain

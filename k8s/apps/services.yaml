@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kits-demo-stable
+spec:
+  selector:
+    app: kits-demo
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kits-demo-canary
+spec:
+  selector:
+    app: kits-demo
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
