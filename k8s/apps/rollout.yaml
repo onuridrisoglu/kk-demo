@@ -45,5 +45,6 @@ spec:
           stableIngress: kits-demo-stable
       steps:
         - setWeight: 20     # spin up canary pods, 20% of new traffic for verification
-        - pause: {}         # 1) verify v2  2) apply X-AppUpdate annotation → notify v1 users → wait for drain
-        - setWeight: 100    # v1 drained → all sessions go to v2, complete rollout
+        - pause: {}         # verify v2 on canary service, then promote manually
+        - setWeight: 100    # all new sessions → v2, existing v1 sessions stay via sticky cookie
+        - pause: {}         # notify v1 users via X-AppUpdate header, wait for drain
