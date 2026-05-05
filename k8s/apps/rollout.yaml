@@ -40,9 +40,9 @@ spec:
     canary:
       canaryService: kits-demo-canary
       stableService: kits-demo-stable
-      gatewayAPI:
-        httpRoute: kits-demo
-        namespace: default
+      trafficRouting:
+        nginx:
+          stableIngress: kits-demo-stable
       steps:
         - setWeight: 0      # deploy v2, no traffic yet
         - pause: {}         # verify v2 on canary service, then promote manually
