@@ -14,16 +14,16 @@ spec:
     spec:
       containers:
         - name: kits-demo
-          image: onurvaadin/kits-demo:2.0
+          image: onurvaadin/kits-demo:1.0
           env:
             - name: APP_VERSION
-              value: "2.0"
+              value: "1.0"
             - name: DB_HOSTNAME
               value: postgres-db-rw
             - name: VAADIN_KUBERNETES_ROLLING_UPDATES
               value: "true"
             - name: VAADIN_KUBERNETES_STICKY_SESSION_COOKIE_NAME
-              value: "vaadin.session"
+              value: "vaadin-session"
             - name: VAADIN_KUBERNETES_CLUSTER_KEY_COOKIE_NAME
               value: "clusterKey"
             - name: VAADIN_KUBERNETES_UPDATE_VERSION_HEADER_NAME
