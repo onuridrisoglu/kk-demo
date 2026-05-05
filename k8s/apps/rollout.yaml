@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: kits-demo
-          image: onurvaadin/kits-demo:2.0
+          image: onurvaadin/kits-demo:1.0
           env:
             - name: APP_VERSION
-              value: "2.0"
+              value: "1.0"
             - name: DB_HOSTNAME
               value: postgres-db-rw
             - name: VAADIN_KUBERNETES_ROLLING_UPDATES
@@ -44,7 +44,6 @@ spec:
         nginx:
           stableIngress: kits-demo-stable
       steps:
-        - setWeight: 20     # spin up canary pods, small % of new traffic for verification
-        - pause: {}         # verify v2 on canary service, then promote manually
-        - setWeight: 100    # all new sessions → v2, existing v1 sessions stay via sticky cookie
-        - pause: {}         # notify v1 users (push X-AppUpdate header to route.yaml), wait for drain
+        - setWeight: 20     # spin up canary pods, 20% of new traffic for verification
+        - pause: {}         # 1) verify v2  2) apply X-AppUpdate annotation → notify v1 users → wait for drain
+        - setWeight: 100    # v1 drained → all sessions go to v2, complete rollout
