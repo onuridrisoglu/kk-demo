@@ -28,7 +28,6 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-name: "vaadin-session"
     nginx.ingress.kubernetes.io/session-cookie-change-on-failure: "true"
     nginx.ingress.kubernetes.io/canary: "true"
-    nginx.ingress.kubernetes.io/canary-weight: "0"
 spec:
   ingressClassName: nginx
   rules:
