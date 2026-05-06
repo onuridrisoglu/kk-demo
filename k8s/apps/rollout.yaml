@@ -43,7 +43,6 @@ spec:
       trafficRouting:
         nginx:
           stableIngress: kits-demo-stable
-          canaryIngress: kits-demo-canary
       steps:
         - setWeight: 0     # spin up canary pods, but send no traffic to them yet
         - pause: {}         # verify v2 on canary service, then promote manually
