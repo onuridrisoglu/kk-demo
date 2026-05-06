@@ -82,6 +82,15 @@ kubectl port-forward svc/ingress-nginx-controller -n ingress-nginx 8080:80
 
 Open `http://localhost:8080` in the browser.
 
+### Create the Vaadin subscription key secret
+
+This secret is not in the repo (public). Create it manually in the cluster once before ArgoCD syncs:
+
+```bash
+kubectl create secret generic vaadin-subscription-key \
+  --from-literal=subscriptionKey=<your-pro-key>
+```
+
 ### Create the ArgoCD Application
 
 ```bash
@@ -165,3 +174,20 @@ docker push onurvaadin/kits-demo:2.0
      --overwrite
    ```
    v2 becomes stable, v1 pods scale down.
+
+### Monitor rollout state
+
+```bash
+# Watch live rollout progress (steps, canary weight, pod status)
+kubectl argo rollouts get rollout kits-demo --watch
+```
+
+### Promote commands
+
+```bash
+# Advance to the next step (use at steps 3 and 6)
+kubectl argo rollouts promote kits-demo
+
+# Skip all remaining steps and complete the rollout immediately
+kubectl argo rollouts promote kits-demo --full
+```
