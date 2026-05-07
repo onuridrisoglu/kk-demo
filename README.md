@@ -102,22 +102,6 @@ argocd app create kits-demo \
   --sync-policy automated \
   --self-heal \
   --directory-recurse
-
-# Allow ArgoCD to ignore canary weight changes managed by Argo Rollouts
-kubectl patch app kits-demo -n argocd --type merge -p '{
-  "spec": {
-    "ignoreDifferences": [
-      {
-        "group": "networking.k8s.io",
-        "kind": "Ingress",
-        "name": "kits-demo-canary",
-        "jsonPointers": [
-          "/metadata/annotations/nginx.ingress.kubernetes.io~1canary-weight"
-        ]
-      }
-    ]
-  }
-}'
 ```
 
 ### Build and push Docker images
