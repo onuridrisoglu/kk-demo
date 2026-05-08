@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
         - name: kits-demo
-          image: onurvaadin/kits-demo:3.3
+          image: onurvaadin/kits-demo:3.4
           env:
             - name: APP_VERSION
-              value: "3.3"
+              value: "3.4"
             - name: DB_HOSTNAME
               value: postgres-db-rw
             - name: REDIS_HOST
