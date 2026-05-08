@@ -20,6 +20,8 @@ spec:
               value: "1.0"
             - name: DB_HOSTNAME
               value: postgres-db-rw
+            - name: REDIS_HOST
+              value: redis-service
             - name: VAADIN_KUBERNETES_ROLLING_UPDATES
               value: "true"
             - name: VAADIN_KUBERNETES_STICKY_SESSION_COOKIE_NAME
