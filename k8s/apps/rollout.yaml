@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: kits-demo
+  namespace: default
 spec:
   replicas: 2
   selector:
@@ -14,12 +15,14 @@ spec:
     spec:
       containers:
         - name: kits-demo
-          image: onurvaadin/kits-demo:1.0
+          image: onurvaadin/kits-demo:3.5
           env:
             - name: APP_VERSION
-              value: "1.0"
+              value: "3.5"
             - name: DB_HOSTNAME
               value: postgres-db-rw
+            - name: REDIS_HOST
+              value: redis-service
             - name: VAADIN_KUBERNETES_ROLLING_UPDATES
               value: "true"
             - name: VAADIN_KUBERNETES_STICKY_SESSION_COOKIE_NAME
